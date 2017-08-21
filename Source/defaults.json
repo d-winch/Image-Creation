@@ -1,0 +1,50 @@
+{
+    "GD057": {
+        "Y": 275, 
+        "ScaleX": 300, 
+        "ScaleY": 300, 
+        "XOffset": 5
+    }, 
+    "AC01J": {
+        "Y": 250, 
+        "ScaleX": 300, 
+        "ScaleY": 300, 
+        "XOffset": 0
+    }, 
+    "GD072": {
+        "Y": 250, 
+        "ScaleX": 300, 
+        "ScaleY": 300, 
+        "XOffset": -5
+    }, 
+    "JH030": {
+        "Y": 250, 
+        "ScaleX": 300, 
+        "ScaleY": 300, 
+        "XOffset": 0
+    }, 
+    "BZ10": {
+        "Y": 250, 
+        "ScaleX": 300, 
+        "ScaleY": 300, 
+        "XOffset": 0
+    }, 
+    "JH01J": {
+        "Y": 270, 
+        "ScaleX": 300, 
+        "ScaleY": 300, 
+        "XOffset": 10
+    }, 
+    "SS030": {
+        "Y": 250, 
+        "ScaleX": 300, 
+        "ScaleY": 300, 
+        "XOffset": 0
+    }, 
+    "SS031": {
+        "Y": 275, 
+        "ScaleX": 260, 
+        "ScaleY": 260, 
+        "XOffset": 0
+    }
+}
