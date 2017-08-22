@@ -81,19 +81,22 @@ class IndividualGUI:
         if code is None:
             return
         try:
-            image_preview = self.creation.process_image(
-                code[0],
-                size=(int(self.entry_scalex.get()),
-                      int(self.entry_scaley.get())),
-                x=int(self.entry_coordsx.get()),
-                y=int(self.entry_coordsy.get()),
-                preview=True
-            )
+            image_preview = self.get_image(code[0], is_preview=True)
             image_preview.show()
         except ValueError:
             self.creation.show_dialog("Error", 'Must be an integer value (e.g., 100)\nand cannot be blank')
         except AttributeError:
             print("image_preview.show() run after process_image() encountered error and returned None")
+
+    def get_image(self, code, is_preview=False):
+        image = self.creation.process_image(
+            code,
+            size=(int(self.entry_scalex.get()), int(self.entry_scaley.get())),
+            x=int(self.entry_coordsx.get()),
+            y=int(self.entry_coordsy.get()),
+            preview=is_preview
+        )
+        return image
 
     def create(self):
         print("Create")
@@ -101,15 +104,11 @@ class IndividualGUI:
         if codes is None:
             return
         for code in codes:
-            image = self.creation.process_image(
-                code,
-                size=(int(self.entry_scalex.get()), int(self.entry_scaley.get())),
-                x=int(self.entry_coordsx.get()),
-                y=int(self.entry_coordsy.get()),
-                preview=True
-            )
             try:
+                image = self.get_image(code)
                 self.creation.save_image(image, code)
+            except ValueError:
+                self.creation.show_dialog("Error", 'Must be an integer value (e.g., 100)\nand cannot be blank')
             except AttributeError:
                 print("Tried to save when image process_error() encountered error and returned None")
                 return
@@ -136,7 +135,8 @@ class IndividualGUI:
         garments.sort()
         return garments
 
-    def option_changed(self):
+    def option_changed(self, *args):
+        print args
         print "the user chose the value {}".format(self.variable.get())
         option = self.variable.get()
         # Returns the default ScaleX, ScaleY, and default co-ordinates X, Y (X is an offset from center)
