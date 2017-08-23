@@ -51,13 +51,14 @@ class GUI:
         gui_ind.show()
 
     def on_closing(self, ind_master):
-        print("HERE")
         self.master.deiconify()
         ind_master.destroy()
 
     def create_all(self):
         if self.entry_file.get() is '':
-            self.show_dialog(title="File Missing", message="Please enter a file path and try again...")
+            self.show_dialog(
+                title="File Missing",
+                message="Please enter a file path and try again...")
             return
         c = creation.Create(self.entry_file.get())
         c.create_all()

@@ -73,6 +73,7 @@ class Create:
                 break
 
     def process_image(self, row, size, x, y, preview=False):
+
         try:
             foreground = self.open_foreground(row, size)
             background = self.open_background(row)
@@ -80,10 +81,16 @@ class Create:
             if preview:
                 self.show_error_dialog(row)
             return
+
         x += background.size[0] / 2 - foreground.size[0] / 2
         background.paste(foreground, (x, y), foreground)
+
         if preview:
-            background = Image.composite(background, Image.new('RGB', background.size, 'white'), background)
+            background = Image.composite(
+                background,
+                Image.new('RGB', background.size, 'white'),
+                background)
+
         return background
 
     def open_foreground(self, row, size):
@@ -150,17 +157,17 @@ class Create:
             ) +
             "\n\n(.PNG files must be in the same directory as data set CSV)")
 
-    @staticmethod
     def show_error_dialog(self, row):
-        self.show_dialog("Error",
-                         "Error during row: {}".format(row) +
-                         "\nPlease check {}{}{}.png or {} {} image name".format(
-                             row[DESIGN],
-                             row[PRINT_COLOUR],
-                             row[PRINT_COLOUR_ALT],
-                             row[GARMENT_SKU],
-                             row[GARMENT_COLOUR]
-                         ) + "\n\n(.PNG files must be in the same directory as data set CSV)")
+        self.show_dialog(
+            "Error",
+            "Error during row: {}".format(row) +
+            "\nPlease check {}{}{}.png or {} {} source image".format(
+                row[DESIGN],
+                row[PRINT_COLOUR],
+                row[PRINT_COLOUR_ALT],
+                row[GARMENT_SKU],
+                row[GARMENT_COLOUR]
+            ) + "\n\n(.PNG files must be in the same directory as data set CSV)")
 
     @staticmethod
     def show_dialog(title, message):
