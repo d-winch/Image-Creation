@@ -115,7 +115,7 @@ class Create:
         return background
 
     def save_image(self, image, row):
-        filename = '{0}-{1}-{2}.png'.format(
+        filename = '{0}-{1}-{2}.jpg'.format(
             row[GARMENT_COLOUR],
             row[PRINT_COLOUR],
             row[PRINT_COLOUR_ALT])
