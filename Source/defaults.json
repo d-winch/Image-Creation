@@ -1,50 +1,110 @@
 {
     "GD057": {
-        "Y": 275, 
-        "ScaleX": 300, 
-        "ScaleY": 300, 
-        "XOffset": 5
-    }, 
+        "Y": 290,
+        "ScaleX": 280,
+        "ScaleY": 280,
+        "XOffset": 8
+    },
     "AC01J": {
-        "Y": 250, 
-        "ScaleX": 300, 
-        "ScaleY": 300, 
+        "Y": 250,
+        "ScaleX": 290,
+        "ScaleY": 290,
         "XOffset": 0
-    }, 
+    },
     "GD072": {
-        "Y": 250, 
-        "ScaleX": 300, 
-        "ScaleY": 300, 
+        "Y": 245,
+        "ScaleX": 285,
+        "ScaleY": 285,
         "XOffset": -5
-    }, 
+    },
     "JH030": {
-        "Y": 250, 
-        "ScaleX": 300, 
-        "ScaleY": 300, 
+        "Y": 250,
+        "ScaleX": 290,
+        "ScaleY": 290,
         "XOffset": 0
-    }, 
+    },
     "BZ10": {
-        "Y": 250, 
-        "ScaleX": 300, 
-        "ScaleY": 300, 
+        "Y": 250,
+        "ScaleX": 285,
+        "ScaleY": 285,
         "XOffset": 0
-    }, 
+    },
     "JH01J": {
-        "Y": 270, 
-        "ScaleX": 300, 
-        "ScaleY": 300, 
-        "XOffset": 10
-    }, 
+        "Y": 280,
+        "ScaleX": 285,
+        "ScaleY": 285,
+        "XOffset": 5
+    },
     "SS030": {
-        "Y": 250, 
-        "ScaleX": 300, 
-        "ScaleY": 300, 
+        "Y": 260,
+        "ScaleX": 285,
+        "ScaleY": 285,
         "XOffset": 0
-    }, 
+    },
     "SS031": {
-        "Y": 275, 
-        "ScaleX": 260, 
-        "ScaleY": 260, 
+        "Y": 285,
+        "ScaleX": 260,
+        "ScaleY": 260,
         "XOffset": 0
+    },
+    "B111B": {
+        "Y": 410,
+        "ScaleX": 480,
+        "ScaleY": 480,
+        "XOffset": 0
+    },
+    "GD014": {
+        "Y": 460,
+        "ScaleX": 540,
+        "ScaleY": 540,
+        "XOffset": 0
+    },
+    "GD076": {
+        "Y": 450,
+        "ScaleX": 500,
+        "ScaleY": 500,
+        "XOffset": -30
+    },
+    "SK271": {
+        "Y": 440,
+        "ScaleX": 565,
+        "ScaleY": 565,
+        "XOffset": 0
+    },
+    "SM271": {
+        "Y": 440,
+        "ScaleX": 530,
+        "ScaleY": 530,
+        "XOffset": 0
+    },
+    "SS007": {
+        "Y": 450,
+        "ScaleX": 550,
+        "ScaleY": 550,
+        "XOffset": 0
+    },
+    "SS026": {
+        "Y": 380,
+        "ScaleX": 600,
+        "ScaleY": 600,
+        "XOffset": -5
+    },
+    "SS028": {
+        "Y": 370,
+        "ScaleX": 580,
+        "ScaleY": 580,
+        "XOffset": 0
+    },
+    "SS051": {
+        "Y": 670,
+        "ScaleX": 580,
+        "ScaleY": 580,
+        "XOffset": 0
+    },
+    "SS100": {
+        "Y": 515,
+        "ScaleX": 630,
+        "ScaleY": 630,
+        "XOffset": 15
     }
 }

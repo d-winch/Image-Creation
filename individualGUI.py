@@ -1,4 +1,6 @@
+import tkinter as tk
 from tkinter import *
+from PIL import Image, ImageTk 
 import os
 import csv
 import json
@@ -82,10 +84,26 @@ class IndividualGUI:
             return
         try:
             image_preview = self.get_image(code[0], is_preview=True)
-            image_preview.show()
+            image_preview.thumbnail((1000,1000), Image.ANTIALIAS)
+            image_preview.save('{0}'.format('Source/preview.png'),
+                   format='png',
+                   subsampling=0,
+                   quality=95)
+            window = tk.Toplevel(self.master)
+            img = Image.open('Source/preview.png')
+            tkimage = ImageTk.PhotoImage(img)
+            tk.Label(window, image=tkimage).pack()
+            if os.path.exists('Source/preview.png'):
+                os.remove('Source/preview.png')
+                print("Preview removed")
+            else:
+                print("The file does not exist")
+            window.mainloop()
+            #image_preview.show()
         except ValueError:
             self.creation.show_dialog("Error", 'Must be an integer value (e.g., 100)\nand cannot be blank')
-        except AttributeError:
+        except AttributeError as e:
+            print(e)
             print("image_preview.show() run after process_image() encountered error and returned None")
 
     def get_image(self, code, is_preview=False):
@@ -132,12 +150,13 @@ class IndividualGUI:
         with open('./Source/defaults.json') as data_file:
             data = json.load(data_file)
         garments = data.keys()
-        garments.sort()
+        #garments.sort()
+        garments = sorted(garments)
         return garments
 
     def option_changed(self, *args):
-        print args
-        print "the user chose the value {}".format(self.variable.get())
+        print(args)
+        print("the user chose the value {}".format(self.variable.get()))
         option = self.variable.get()
         # Returns the default ScaleX, ScaleY, and default co-ordinates X, Y (X is an offset from center)
         g = self.creation.read_defaults(option)

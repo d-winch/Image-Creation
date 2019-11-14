@@ -1,7 +1,9 @@
 import csv
 import os
 import sys
-import tkMessageBox
+#import tkMessageBox
+##import tkinter.messagebox
+from tkinter import messagebox
 from PIL import Image, ImageEnhance
 import json
 
@@ -32,11 +34,12 @@ class Create:
         data = []
         with(open(self.file_path, 'r')) as csv_file:
             reader = csv.reader(csv_file, delimiter=',', quotechar='"')
-            reader.next()  # Discount header
+            #reader.next()  # Discount header
+            next(reader, None)  # skip the headers
             for row in reader:
                 data.append(row)
         while (['', '', '', '', '']) in data:
-            data.remove(['', '', '', '', ''])  # Remove blank entries
+            data.remove(['', '', '', '', ''])  # Remove blank rows
         return data
 
     def create_all(self):
@@ -46,7 +49,7 @@ class Create:
 
         for i in range(0, len(data)):
 
-            print "{} of {}".format(i, len(data))
+            print("{} of {}".format(i+1, len(data)))
             cancel = False
 
             while True:
@@ -73,7 +76,6 @@ class Create:
                 break
 
     def process_image(self, row, size, x, y, preview=False):
-
         try:
             foreground = self.open_foreground(row, size)
             background = self.open_background(row)
@@ -82,7 +84,7 @@ class Create:
                 self.show_error_dialog(row)
             return
 
-        x += background.size[0] / 2 - foreground.size[0] / 2
+        x += background.size[0] // 2 - foreground.size[0] // 2
         background.paste(foreground, (x, y), foreground)
 
         if preview:
@@ -95,7 +97,7 @@ class Create:
 
     def open_foreground(self, row, size):
         design_prefix = row[DESIGN][:2]
-        design_path = '{0}/{2}{3}{4}.png'.format(self.file_directory, design_prefix, row[DESIGN],
+        design_path = '{0}/{1}{2}{3}.png'.format(self.file_directory, row[DESIGN],
                                                  row[PRINT_COLOUR], row[PRINT_COLOUR_ALT])
         foreground = Image.open(design_path).convert('RGBA')
         foreground.putalpha(ImageEnhance.Brightness(foreground.split()[3]).enhance(0.989))
@@ -108,10 +110,16 @@ class Create:
 
     @staticmethod
     def open_background(row):
-        source_path = 'Source/{0}/{0}{1}.png'.format(
-            row[GARMENT_SKU],
-            row[GARMENT_COLOUR]).replace(' ', '')
-        background = Image.open(source_path).convert('RGBA')
+        try:
+            source_path = 'Source/{0}/{0}{1}.png'.format(
+                row[GARMENT_SKU],
+                row[GARMENT_COLOUR]).replace(' ', '')
+            background = Image.open(source_path).convert('RGBA')
+        except:
+            source_path = 'Source/{0}/{0}{1}.jpg'.format(
+                row[GARMENT_SKU],
+                row[GARMENT_COLOUR]).replace(' ', '')
+            background = Image.open(source_path).convert('RGBA')
         return background
 
     def save_image(self, image, row):
@@ -123,13 +131,23 @@ class Create:
         path = '{0}/{1}/{2}'.format(self.file_directory, row[DESIGN], row[GARMENT_SKU])
         if not os.path.exists(path):
             os.makedirs(path)
-        image.save('{0}/{1}'.format(path, filename))
+        # Flatten image to remove transparency
+        image = Image.composite(
+            image,
+            Image.new('RGB',
+                      image.size,
+                      'white'),
+            image)
+        image.save('{0}/{1}'.format(path, filename),
+                   format='jpeg',
+                   subsampling=0,
+                   quality=95)
 
     @staticmethod
     def read_defaults(garment=None):
         with open('./Source/defaults.json') as data_file:
             data = json.load(data_file)
-            print data
+            print(data)
             if garment is not None:
                 return data[garment]
             return data
@@ -145,7 +163,7 @@ class Create:
 
     @staticmethod
     def retry_image(row):
-        return tkMessageBox.askretrycancel(
+        return messagebox.askretrycancel(
             "Error",
             "Error during row: {}".format(row) +
             "\nPlease check {}{}{}.png or {} {} image name".format(
@@ -171,4 +189,4 @@ class Create:
 
     @staticmethod
     def show_dialog(title, message):
-        tkMessageBox.showinfo(title, message)
+        messagebox.showinfo(title, message)

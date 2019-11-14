@@ -1,6 +1,8 @@
-from tkinter import Tk, Label, Button, Entry, W, END, Toplevel
-from tkFileDialog import askopenfilename
-import tkMessageBox
+from tkinter import Tk, Label, Button, Entry, W, END, Toplevel, messagebox
+#from tkFileDialog import askopenfilename
+import tkinter.filedialog
+#import tkMessageBox
+##import tkinter.messagebox
 import individualGUI
 import creation
 import sys
@@ -36,13 +38,15 @@ class GUI:
             child.grid_configure(padx=10, pady=5)
 
     def browse_file(self):
-        f = askopenfilename()
+        #f = askopenfilename()
+        f = tkinter.filedialog.askopenfilename()
         self.entry_file.delete(0, END)
         self.entry_file.insert(END, f)
 
     def individual(self):
         if self.entry_file.get() is '':
-            self.show_dialog(title="File Missing", message="Please enter a file path and try again...")
+            self.show_dialog(title="File Missing",
+                             message="Please enter a file path and try again...")
             return
         ind_master = Toplevel()
         gui_ind = individualGUI.IndividualGUI(ind_master, self.entry_file.get())
@@ -65,7 +69,7 @@ class GUI:
 
     @staticmethod
     def show_dialog(title, message):
-        tkMessageBox.showinfo(title, message)
+        messagebox.showinfo(title, message)
 
 root = Tk()
 my_gui = GUI(root)

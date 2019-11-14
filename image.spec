@@ -22,10 +22,10 @@ exe = EXE(pyz,
           a.binaries,
           a.zipfiles,
           a.datas,
-          name='image',
+          name='image_jpg_quality_95(2)',
           debug=False,
           strip=False,
           upx=True,
           runtime_tmpdir=None,
           console=False,
-          icon='C:\\Users\\Winch\\Desktop\\Temp\\Imagery\\Pillow Python\\Image Creation\\icon.ico')
+          icon='.\\icon.ico')
